@@ -1,34 +1,41 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:test1/callbacks.dart';
 import 'package:test1/flutter_visualizers.dart';
 
 class Visualizer extends StatefulWidget {
-
   final Function(BuildContext context, List<int> fft) builder;
-  int id;
+  final int id;
+
   Visualizer({
-    required this.builder, required this.id
+    required this.builder,
+    required this.id,
   });
 
   @override
-  _VisualizerState createState() => new _VisualizerState();
+  _VisualizerState createState() => _VisualizerState();
 }
 
 class _VisualizerState extends State<Visualizer> {
-
   late AudioVisualizer visualizer;
-  List<int> fft = const [];
+  List<int> fft = [];
+
   @override
   void initState() {
     super.initState();
-    visualizer = FlutterVisualizers.audioVisualizer()
-      ..activate(widget.id)
+    visualizer = AudioVisualizer(
+      channel: MethodChannel('calls'),
+    )
       ..addListener(
-          waveformCallback: (List<int> samples) {
-            setState(() => fft = samples);
-          }, fftCallback: (List<int> fftSamples) {  }
-      );
+        fftCallback: (List<int> fftSamples) {
+          setState(() => fft = fftSamples);
+        },
+        waveformCallback: (List<int> waveformSamples) {
+          // Handle waveform data if needed
+        },
+      )
+      ..activate(widget.id);
   }
 
   @override

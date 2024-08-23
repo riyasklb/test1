@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:test1/screen.dart';
+import 'package:test1/widget.dart';
 
-import 'package:test1/widget.dart'; // Make sure this path is correct
+
+
 
 void main() {
   runApp(MyApp());

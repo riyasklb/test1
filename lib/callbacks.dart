@@ -32,8 +32,8 @@ class AudioVisualizer {
     }
   }
 
-  void activate(int sessionID) {
-    channel.invokeMethod('audiovisualizer/activate_visualizer', {"sessionID": sessionID});
+  void activate(int sessionID)async {
+  await  channel.invokeMethod('audiovisualizer/activate_visualizer', {"sessionID": sessionID});
   }
 
   void deactivate() {

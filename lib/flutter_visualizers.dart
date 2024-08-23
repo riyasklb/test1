@@ -4,7 +4,7 @@ import 'package:test1/callbacks.dart';
 
 class FlutterVisualizers {
   static const MethodChannel _channel =
-      const MethodChannel('fluttery_audio_visualizer');
+      const MethodChannel('calls');
 
   static AudioVisualizer audioVisualizer() {
     return new AudioVisualizer(
